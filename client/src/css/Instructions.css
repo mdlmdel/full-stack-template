@@ -1,0 +1,17 @@
+.Instructions {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.Instructions-text {
+  background-color: #dddddd;
+  height: 150px;
+  margin: 10px;
+  padding: 20px;
+  color: #00356b;
+  font-weight: normal;
+}
+
+p {
+  background: #fff;
+}
