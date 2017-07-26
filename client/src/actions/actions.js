@@ -20,6 +20,7 @@ export const getEntities = query => dispatch => {
   console.log('Search for an entity', query);
   dispatch({ type: GET_ENTITY, query });
 
+  console.log('This is what the return axios.get returns', query);
   return axios.get(`${apiUrl}/entities?query=${query}`)
     .then(res => {
       console.log('RES', res);
