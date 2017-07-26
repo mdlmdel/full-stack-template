@@ -1,5 +1,7 @@
 import axios from 'axios'; 
 
+const apiUrl = 'https://senticord.herokuapp.com'
+
 const baseURL = 'https://gateway-a.watsonplatform.net/calls/url/URLGetTextSentiment'
 axios.default.baseURL = baseURL; 
 
@@ -18,7 +20,7 @@ export const getEntities = query => dispatch => {
   console.log('Search for an entity', query);
   dispatch({ type: GET_ENTITY, query });
 
-  return axios.get(`http://localhost:8080/entities?query=${query}`)
+  return axios.get(`${apiUrl}/entities?query=${query}`)
     .then(res => {
       console.log('RES', res);
       dispatch({ type: GETENTITY_SUCCESS, data: res.data })
@@ -72,7 +74,7 @@ export const saveEntities = (entity, query) => (dispatch, getState) => {
   console.log(state);
   // axios.post(`http://localhost:8080/save-record/${id}`)
   // See what was console logged here
-  axios.post(`http://localhost:8080/save-record`, {...entity, query})
+  axios.post(`${apiUrl}/save-record`, {...entity, query})
     .then(res => {
       console.log(res.data);
       // Added 
@@ -84,7 +86,7 @@ export const saveEntities = (entity, query) => (dispatch, getState) => {
 }
 
 export const displayResults = () => dispatch => {
-  return axios.get(`http://localhost:8080/view-reports`)
+  return axios.get(`${apiUrl}/view-reports`)
     .then(res => {
       //console.log('RES', res);
       dispatch({ type: DISPLAY_RESULTS, data: res.data })
@@ -104,7 +106,7 @@ export const displayResults = () => dispatch => {
 
 export const deleteEntities = id => (dispatch, getState) => {
   // Access backend from SentiCord server.js backend
-  axios.post(`http://localhost:8080/entity/${id}`)
+  axios.post(`${apiUrl}/entity/${id}`)
     .then(res => {
       console.log(res.data)
       //getState().filter(query => query.id !== action.id)
