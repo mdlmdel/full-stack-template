@@ -15,8 +15,7 @@ export const DISPLAY_RESULTS = 'DISPLAY_RESULTS';
 
 export const GETENTITY_SUCCESS = 'GETENTITY_SUCCESS';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
-
-/* GET_ENTITY AND DISPLAY RESULTS STARTS 
+ 
   export const getEntities = query => dispatch => {
   console.log('Search for an entity', query);
   dispatch({ type: GET_ENTITY, query });
@@ -28,15 +27,14 @@ export const SEARCH_ERROR = 'SEARCH_ERROR';
       dispatch({ type: GETENTITY_SUCCESS, data: res.data })
     })
     .catch(error => dispatch({ type: SEARCH_ERROR, error }));
-}*/
+}
 
 /*export const displayResults = (table, results) => ({
     // This is how the reducer knows what type of action you're calling
     type: DISPLAY_RESULTS,
     table,
     results
-});
-GET_ENTITY AND DISPLAY RESULTS ENDS */
+});*/
 
 // All this is is a function that returns an object, a pure function
 export const welcomePage = (page, instructions) => ({
