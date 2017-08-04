@@ -18,10 +18,9 @@ export const SEARCH_ERROR = 'SEARCH_ERROR';
  
   export const getEntities = query => dispatch => {
   console.log('Search for an entity', query);
-  dispatch({ type: GET_ENTITY, query });
 
   console.log('This is what the return axios.get returns', query);
-  return axios.get(`${apiUrl}/entities?query=${query}`)
+  return axios.get(`${apiUrl}/api/entities?query=${query}`)
     .then(res => {
       console.log('RES', res);
       dispatch({ type: GETENTITY_SUCCESS, data: res.data })
@@ -29,6 +28,10 @@ export const SEARCH_ERROR = 'SEARCH_ERROR';
     .catch(error => dispatch({ type: SEARCH_ERROR, error }));
 }
 
+/*const getEntitySuccess = (entities) => ({
+  type: 'GETENTITY_SUCCESS', 
+  entities
+})/*
 /*export const displayResults = (table, results) => ({
     // This is how the reducer knows what type of action you're calling
     type: DISPLAY_RESULTS,
@@ -75,7 +78,7 @@ export const saveEntities = (entity, query) => (dispatch, getState) => {
   console.log(state);
   // axios.post(`http://localhost:8080/save-record/${id}`)
   // See what was console logged here
-  axios.post(`${apiUrl}/save-record`, {...entity, query})
+  axios.post(`${apiUrl}/api//save-record`, {...entity, query})
     .then(res => {
       console.log(res.data);
       // Added 
@@ -87,7 +90,7 @@ export const saveEntities = (entity, query) => (dispatch, getState) => {
 }
 
 export const displayResults = () => dispatch => {
-  return axios.get(`${apiUrl}/view-reports`)
+  return axios.get(`${apiUrl}/api//view-reports`)
     .then(res => {
       //console.log('RES', res);
       dispatch({ type: DISPLAY_RESULTS, data: res.data })
@@ -107,7 +110,7 @@ export const displayResults = () => dispatch => {
 
 export const deleteEntities = id => (dispatch, getState) => {
   // Access backend from SentiCord server.js backend
-  axios.post(`${apiUrl}/entity/${id}`)
+  axios.post(`${apiUrl}/api//entity/${id}`)
     .then(res => {
       console.log(res.data)
       //getState().filter(query => query.id !== action.id)
