@@ -1,6 +1,6 @@
 import axios from 'axios'; 
 
-const apiUrl = 'https://senticord.herokuapp.com'
+const apiUrl = 'https://gateway-a.watsonplatform.net/calls/url/URLGetTextSentiment'
 
 const baseURL = 'https://gateway-a.watsonplatform.net/calls/url/URLGetTextSentiment'
 axios.default.baseURL = baseURL; 
@@ -28,10 +28,10 @@ export const SEARCH_ERROR = 'SEARCH_ERROR';
     .catch(error => dispatch({ type: SEARCH_ERROR, error }));
 }
 
-/*const getEntitySuccess = (entities) => ({
+const getEntitySuccess = (entities) => ({
   type: 'GETENTITY_SUCCESS', 
   entities
-})/*
+})
 /*export const displayResults = (table, results) => ({
     // This is how the reducer knows what type of action you're calling
     type: DISPLAY_RESULTS,
