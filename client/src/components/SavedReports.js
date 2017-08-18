@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 //import SaveReportButton from './SaveReportButton';
 
 const SavedReports = ({entity, data, displayResults, deleteEntities}) =>  {
+  console.log("This is the entity console.log", entity);
   if (!entity.data[2]) {
     return null;
   }
@@ -40,7 +41,6 @@ const SavedReports = ({entity, data, displayResults, deleteEntities}) =>  {
           <Table.Cell><button onClick={() => deleteEntities(item._id)}>Delete</button></Table.Cell>
         </Table.Row>
       ))}
-        
       </Table.Body>
     </Table>
     </Grid.Column>
