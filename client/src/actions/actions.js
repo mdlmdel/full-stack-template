@@ -1,9 +1,10 @@
 import axios from 'axios'; 
 
 const apiUrl = 'https://gateway-a.watsonplatform.net/calls/url/URLGetTextSentiment'
-
+const apikey = '0ea95031ba8028ae9a37a56a078288bcbb996e11';
 const baseURL = 'https://gateway-a.watsonplatform.net/calls/url/URLGetTextSentiment'
 axios.default.baseURL = baseURL; 
+let globalQuery = '';
 
 // To have access to these outside of this file, you need to export all of them
 export const WELCOME_PAGE = 'WELCOME_PAGE';
@@ -15,12 +16,19 @@ export const DISPLAY_RESULTS = 'DISPLAY_RESULTS';
 
 export const GETENTITY_SUCCESS = 'GETENTITY_SUCCESS';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
- 
-  export const getEntities = query => dispatch => {
-  console.log('Search for an entity', query);
 
+export const getEntities = query => dispatch => {
+  console.log('Search for an entity', query);
+  globalQuery = query;
+  let params = {
+      cquery: query,
+      url: "https://hbr.org",
+      outputMode: "json",
+      part: 'snippet',
+      apikey
+    }
   console.log('This is what the return axios.get returns', query);
-  return axios.get(`${apiUrl}/api/entities?query=${query}`)
+  return axios.get(`${apiUrl}`, { params })
     .then(res => {
       console.log('RES', res);
       dispatch({ type: GETENTITY_SUCCESS, data: res.data })
@@ -78,7 +86,7 @@ export const saveEntities = (entity, query) => (dispatch, getState) => {
   console.log(state);
   // axios.post(`http://localhost:8080/save-record/${id}`)
   // See what was console logged here
-  axios.post(`${apiUrl}/api//save-record`, {...entity, query})
+  axios.post(`api/save-record`, {...entity, query: globalQuery})
     .then(res => {
       console.log(res.data);
       // Added 
@@ -90,7 +98,7 @@ export const saveEntities = (entity, query) => (dispatch, getState) => {
 }
 
 export const displayResults = () => dispatch => {
-  return axios.get(`${apiUrl}/api//view-reports`)
+  return axios.get(`api/view-reports`)
     .then(res => {
       //console.log('RES', res);
       dispatch({ type: DISPLAY_RESULTS, data: res.data })
@@ -110,7 +118,7 @@ export const displayResults = () => dispatch => {
 
 export const deleteEntities = id => (dispatch, getState) => {
   // Access backend from SentiCord server.js backend
-  axios.post(`${apiUrl}/api//entity/${id}`)
+  axios.post(`/api//entity/${id}`)
     .then(res => {
       console.log(res.data)
       //getState().filter(query => query.id !== action.id)

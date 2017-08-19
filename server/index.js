@@ -1,6 +1,15 @@
 const path = require('path');
 const express = require('express');
-
+const watson = require('watson-developer-cloud');
+require('dotenv').config();
+const config = require('./config/config');
+const Entity = require('./model/entity');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+mongoose.connect(config.DATABASE_URL);
+const alchemy_language = watson.alchemy_language({
+  api_key: config.API_KEY
+});
 const app = express();
 
 // API endpoints go here!
@@ -9,24 +18,16 @@ const app = express();
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-// Unhandled requests which aren't for the API should serve index.html so
-// client-side routing using browserHistory can function
-app.get(/^(?!\/api(\/|$))/, (req, res) => {
-    const index = path.resolve(__dirname, '../client/build', 'index.html');
-    res.sendFile(index);
-});
+// parse application/json
+app.use(bodyParser.json())
 
 // GET request to retrieve sentiment analysis on an entity from search
 app.get('/api/entities', (req, res) => {
-  console.log(req.query);
   // This is what you search for
-  const q = req.query;
-  console.log(config.API_KEY);
+  const { query } = req.query;
   const params = {
-  url: 'https://hbr.org', 
-  // Here is the query variable
-  // targets: [q]
-  sourceText: q
+  url: 'https://hbr.org',
+  sourceText: query
   };
 
   alchemy_language.sentiment(params, function (err, response) {
@@ -95,14 +96,19 @@ app.post('/api/save-record', (req, res) => {
 
   // Record that fully encapsulates search
   //Entity.create(req.body, function(err, record) {
-    Entity.create(req.body, function(err, query) {
+    const newEntity = new Entity(req.body);
+    console.log(req.body);
+    console.log(newEntity);
+    newEntity.save(function(err, query) {
     if (err) {
       console.log("Error creating record");
-      res.status(500).json(err);
-      return;
+      return res.status(500).json(err);
+      
+    } else {
+      console.log("Record created");
+      return res.status(201).json(query);
     }
-    console.log("Record created");
-    res.status(201).json(query);
+    
   });
 });
 
@@ -150,6 +156,13 @@ app.delete('/api/view-reports', (req, res) => {
     .exec()
     .then(entity => res.status(204).end())
     .catch(err => {console.error(err); res.status(500).json({message: 'Internal server error'})});
+});
+
+// Unhandled requests which aren't for the API should serve index.html so
+// client-side routing using browserHistory can function
+app.get(/^(?!\/api(\/|$))/, (req, res) => {
+    const index = path.resolve(__dirname, '../client/build', 'index.html');
+    res.sendFile(index);
 });
 
 let server;
