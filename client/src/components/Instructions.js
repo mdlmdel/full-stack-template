@@ -10,7 +10,7 @@ const Instructions = () => (
   <Container text>
         <p className="Instructions Instructions-text">Enter the entity you want to analyze, and click "Select Entity." Senticord will use the IBM Watson 
           AlchemyLanguage API to perform sentiment analysis on the term you search for as it appears 
-          on the home page of the Harvard Business Review. 
+          on the home page of Harvard Business Review. 
         </p>
   </Container>
   </Grid.Column>

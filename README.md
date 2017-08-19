@@ -1,58 +1,21 @@
-# Thinkful Full Stack Template
+# Senticord Sentiment Analysis
 
-A template for developing and deploying full stack JavaScript apps.
+Senticord is a full stack React Redux web application that enables users to search for, add, save, and delete sentiment analysis reports on terms, called entities. The application uses the [IBM Watson AlchemyLanguage API](https://www.ibm.com/watson/developercloud/alchemy-language/api/v1/#authentication) to provide sentiment analysis on those entities as they appear on the home page of Harvard Business Review. Users search for the entity of their choice, and the API returns the results in the form of sentiment score, sentiment type, and date, which timestamps the reports. Users can then save a sentiment analysis report on the entity they searched for and retrieve previously saved reports, which they can evaluate over time to identify trends. 
 
-## Getting started
+![senticord](https://cloud.githubusercontent.com/assets/20372858/23835096/886b19f8-0737-11e7-9a49-9a4885fb434e.jpg)
 
-### Setting up a project
+## How the Application was Built
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/Thinkful-Ed/full-stack-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left **un**checked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+Senticord was built using React, Redux, MongoDB, Express, Node, Axios, and the [IBM Watson AlchemyLanguage API](https://www.ibm.com/watson/developercloud/alchemy-language/api/v1/#authentication). 
 
-### Working on the project
+## Running the App
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm run dev`
-    * Starts a server running at http://localhost:8080
-    * Automatically rebuilds when any of your files change
+Use the deployed version of the app [here](https://senticord.herokuapp.com).
 
-## Proxying
+Or, run the application locally: 
 
-In development, the full stack template works by proxying requests from port 8080 to the server or the client.  Any requests to routes which start with `/api/`, (for example, `/api/foo`, or `/api/foo/bar`) will be sent to the server.  All other requests, will serve the client.
+1. Download the project, and install the dependencies using 'npm install'.
+2. Use a local server to run the application. 
+3. Once the server is running, search for entities of your choice, and save and view reports. 
 
-*tl;dr* Make sure your API endpoints start with `/api`.
-
-## Installing dependencies
-
-Client-side dependencies should be installed into the `client` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/client
-npm install --save dependency-name
-```
-
-Server-side dependencies should be installed into the `server` directory:
-
-```
-cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME/server
-npm install --save dependency-name
-```
-
-## Deployment
-
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
-
-### Setting up the project on Heroku
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
-
+-MdL
