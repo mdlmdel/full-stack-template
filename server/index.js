@@ -4,8 +4,8 @@ const watson = require('watson-developer-cloud');
 require('dotenv').config();
 const config = require('./config/config');
 const Entity = require('./model/entity');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 mongoose.connect(config.DATABASE_URL);
 const alchemy_language = watson.alchemy_language({
   api_key: config.API_KEY
