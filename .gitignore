@@ -1,3 +1,9 @@
+## Live Site
+[https://senticord.herokuapp.com](https://senticord.herokuapp.com)
+
+# Config
+server/config/config.js 
+
 # Logs
 logs
 *.log
